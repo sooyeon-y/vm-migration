@@ -1,0 +1,57 @@
+- hosts: all
+  tasks:
+    - name: shell command 1
+      become: true
+      shell: cat /proc/cpuinfo > cpuinfo.txt
+    - name: shell command 2
+      become: true
+      shell: cat /proc/meminfo > meminfo.txt
+    - name: shell command 3
+      become: true
+      shell: grep "apt-get install" /var/log/apt/history.log > applog.txt
+    - name: shell command 4
+      become: true
+      shell: cat /etc/*-release > osinfo.txt
+    - name: shell command 5
+      become: true
+      shell: ifconfig > netinfo.txt
+    - name: shell command 6
+      become: true
+      shell: sudo iptables -L > firewall.txt
+
+    - name: fetch 1
+      become: true
+      fetch:
+        src: /home/user/cpuinfo.txt
+        dest: /home/user
+        fail_on_missing: yes
+    - name: fetch 2
+      become: true
+      fetch:
+        src: /home/user/meminfo.txt
+        dest: /home/user
+        fail_on_missing: yes
+    - name: fetch 3
+      become: true
+      fetch:
+        src: /home/user/applog.txt
+        dest: /home/user
+    - name: fetch 4
+      become: true
+      fetch:
+        src: /home/user/osinfo.txt
+        dest: /home/user
+        fail_on_missing: yes
+    - name: fetch 5
+      become: true
+      fetch:
+        src: /home/user/netinfo.txt
+        dest: /home/user
+        fail_on_missing: yes
+    - name: fetch 6
+      become: true
+      fetch:
+        src: /home/user/firewall.txt
+        dest: /home/user
+        fail_on_missing: yes
+
